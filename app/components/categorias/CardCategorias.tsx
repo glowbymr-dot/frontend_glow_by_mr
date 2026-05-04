@@ -1,5 +1,4 @@
 import { Categorias } from "@/app/api/categorias/interfaces/response-categorias.interface";
-import { getStrapiImage } from "@/app/helpers/funciones/getStrapiImage";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Package, Sparkles } from "lucide-react";
@@ -21,7 +20,7 @@ const CardCategorias = ({ categoria, index }: Props) => {
           {categoria.mainImage ? (
             <>
               <Image
-                src={getStrapiImage(categoria.mainImage.url)}
+                src={categoria.mainImage.url}
                 alt={categoria.categoryName}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"

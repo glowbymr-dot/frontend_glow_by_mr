@@ -2,7 +2,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag, Tag } from "lucide-react";
-import { getStrapiImage } from "@/app/helpers/funciones/getStrapiImage";
 import { Producto } from "@/app/api/productos/interfaces/response-productos.interface";
 import { useRouter } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
@@ -36,7 +35,7 @@ const CardProductos = ({ producto }: Props) => {
       <div className="relative h-64 w-full overflow-hidden bg-gray-100">
         {producto.images && producto.images[0] ? (
           <Image
-            src={getStrapiImage(producto.images[0].url)}
+            src={producto.images[0].url}
             alt={producto.productName}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-110"

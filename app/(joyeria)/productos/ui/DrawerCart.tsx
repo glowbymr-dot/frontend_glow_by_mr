@@ -1,4 +1,3 @@
-import { getStrapiImage } from "@/app/helpers/funciones/getStrapiImage";
 import { CartItem } from "@/app/store/cart-store";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -116,7 +115,7 @@ const DrawerCart = ({
                     <div className="relative w-20 h-20 bg-gray-100 rounded-lg overflow-hidden">
                       <Image
                         src={
-                          getStrapiImage(item.images?.[0]?.url) ||
+                          item.images?.[0]?.url ||
                           "/images/product_not_found.png"
                         }
                         alt={item.productName}

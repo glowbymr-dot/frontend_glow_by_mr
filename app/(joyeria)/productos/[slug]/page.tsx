@@ -8,7 +8,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getStrapiImage } from "@/app/helpers/funciones/getStrapiImage";
 import SkeletonDetailsProducts from "../ui/SkeletonDetailsProducts";
 import LinksDetailsProduct from "../ui/LinksDetailsProduct";
 import DetailsProduct from "../ui/DetailsProduct";
@@ -66,7 +65,7 @@ const DetailsProductBySlug = () => {
               <div className="aspect-square relative">
                 {mainImage && (
                   <Image
-                    src={getStrapiImage(mainImage.url)}
+                    src={mainImage.url}
                     alt={product.productName}
                     fill
                     className="object-cover hover:scale-105 transition-transform duration-300"
@@ -95,7 +94,7 @@ const DetailsProductBySlug = () => {
                     }`}
                   >
                     <Image
-                      src={getStrapiImage(image.url)}
+                      src={image.url}
                       alt={`${product.productName} - imagen ${index + 1}`}
                       fill
                       unoptimized
