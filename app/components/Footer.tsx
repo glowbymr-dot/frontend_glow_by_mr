@@ -13,56 +13,23 @@ import {
   CreditCard,
 } from "lucide-react";
 import { redesSociales } from "../helpers/data/redes";
+import { beneficios } from "../helpers/data/home";
+import { metodosPago } from "../helpers/data/metodosPago";
+import { enlacesUtiles } from "../helpers/data/enlaces-utiles";
 
 const Footer = () => {
-  const FacebookIcon = () => (
-    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-    </svg>
-  );
-
-  const InstagramIcon = () => (
-    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-    </svg>
-  );
-
-  const enlacesUtiles = [
-    { nombre: "Sobre Nosotros", href: "/nosotros" },
-    { nombre: "Contacto", href: "/contacto" },
-    { nombre: "Preguntas Frecuentes", href: "/faq" },
-    { nombre: "Política de Envíos", href: "/envios" },
-    { nombre: "Política de Devoluciones", href: "/devoluciones" },
-    { nombre: "Términos y Condiciones", href: "/terminos" },
-  ];
-
-  const metodosPago = [
-    { nombre: "PayPal", icono: "💰" },
-    { nombre: "Transferencia", icono: "🏦" },
-    { nombre: "Efectivo", icono: "💵" },
-  ];
-
-  const beneficios = [
-    { icono: Truck, texto: "Envío gratis en compras > L 2,000" },
-    { icono: Shield, texto: "Garantía de autenticidad" },
-    { icono: CreditCard, texto: "Pagos 100% seguros" },
-    { icono: Heart, texto: "Atención personalizada" },
-  ];
-
   return (
     <footer className="bg-linear-to-b from-gray-900 to-gray-950 text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pb-12 border-b border-gray-800 mb-12">
           {beneficios.map((beneficio, index) => {
-            const Icono = beneficio.icono;
+            const Icono = beneficio.icon;
             return (
               <div key={index} className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-linear-to-r from-[#A0714C] to-[#B17953] rounded-full flex items-center justify-center shrink-0">
                   <Icono className="w-6 h-6 text-white" />
                 </div>
-                <p className="text-sm font-medium">{beneficio.texto}</p>
+                <p className="text-sm font-medium">{beneficio.title}</p>
               </div>
             );
           })}
@@ -73,7 +40,7 @@ const Footer = () => {
             <div className="flex items-center gap-2 mb-4">
               <Sparkles className="w-6 h-6 text-[#A0714C]" />
               <h2 className="text-2xl font-bold bg-linear-to-r from-[#A0714C] to-[#B17953] bg-clip-text text-transparent">
-                Joyería Elegance
+                Joyería Glow By MR
               </h2>
             </div>
             <p className="text-gray-400 text-sm mb-4 leading-relaxed">
