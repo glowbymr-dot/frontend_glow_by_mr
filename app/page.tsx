@@ -54,19 +54,21 @@ export default function Home() {
         </motion.div>
       </motion.div>
 
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <motion.div variants={fadeUp}>
-          <ProductosDestacados
-            productos={productos}
-            isLoading={cargando_productos}
-          />
+      {productos && productos.data.length > 0 && (
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <motion.div variants={fadeUp}>
+            <ProductosDestacados
+              productos={productos}
+              isLoading={cargando_productos}
+            />
+          </motion.div>
         </motion.div>
-      </motion.div>
+      )}
 
       <motion.div
         initial="hidden"

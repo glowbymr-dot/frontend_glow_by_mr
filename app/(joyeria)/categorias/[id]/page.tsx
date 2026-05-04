@@ -206,7 +206,9 @@ const CategoriasIdPage = () => {
         </div>
       </section>
 
-      <ProductosOferta productos={productos_oferta} isLoading={cargando} />
+      {productos_oferta && productos_oferta.data.length > 0 && (
+        <ProductosOferta productos={productos_oferta} isLoading={cargando} />
+      )}
       <Ventajas />
     </div>
   );
