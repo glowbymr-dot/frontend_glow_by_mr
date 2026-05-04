@@ -1,6 +1,7 @@
 import {
   FacebookIcon,
   InstagramIcon,
+  TikTokIcon,
   TwitterIcon,
 } from "@/app/components/IconsRedes";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
@@ -9,21 +10,21 @@ export const infoContacto = [
   {
     icon: MapPin,
     title: "Visítanos",
-    details: ["Calle Principal #123", "Centro Histórico, Ciudad"],
+    details: [`${process.env.NEXT_PUBLIC_DIRECCION}`],
     color: "#A0714C",
     bgGradient: "from-[#A0714C]/10 to-[#B17953]/10",
   },
   {
     icon: Phone,
     title: "Llámanos",
-    details: ["+504 1234-5678", "+504 8765-4321"],
+    details: [`+504 ${process.env.NEXT_PUBLIC_PHONE}`],
     color: "#10b981",
     bgGradient: "from-emerald-100 to-green-100",
   },
   {
     icon: Mail,
     title: "Escríbenos",
-    details: ["info@joyeria.com", "ventas@joyeria.com"],
+    details: [`${process.env.NEXT_PUBLIC_EMAIL}`],
     color: "#3b82f6",
     bgGradient: "from-blue-100 to-cyan-100",
   },
@@ -40,19 +41,19 @@ export const redesSociales = [
   {
     icon: FacebookIcon,
     nombre: "Facebook",
-    url: "#",
+    url: `${process.env.NEXT_PUBLIC_FACEBOOK}`,
     color: "#1877f2",
   },
   {
     icon: InstagramIcon,
     nombre: "Instagram",
-    url: "#",
+    url: `${process.env.NEXT_PUBLIC_INSTAGRAM}`,
     color: "#e4405f",
   },
   {
-    icon: TwitterIcon,
-    nombre: "Twitter",
-    url: "#",
-    color: "#1da1f2",
+    icon: TikTokIcon,
+    nombre: "TikTok",
+    url: `${process.env.NEXT_PUBLIC_TIKTOK}`,
+    color: "#25F4EE",
   },
 ];

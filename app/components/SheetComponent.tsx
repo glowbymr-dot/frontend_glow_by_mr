@@ -1,7 +1,7 @@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { navItems } from "../helpers/data/navItems";
-import { Heart, Menu, ShoppingBag } from "lucide-react";
+import { Menu } from "lucide-react";
 import Image from "next/image";
 
 interface Props {
@@ -69,37 +69,6 @@ const SheetComponent = ({ isOpen, setIsOpen }: Props) => {
               <span className="text-base font-medium">{item.name}</span>
             </a>
           ))}
-
-          <div className="pt-6 border-t" style={{ borderTopColor: "#C29678" }}>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <Heart className="h-5 w-5" style={{ color: "#A0714C" }} />
-                <span
-                  className="text-base font-medium"
-                  style={{ color: "#664C3A" }}
-                >
-                  Favoritos
-                </span>
-              </div>
-              <span className="text-sm" style={{ color: "#9E9C99" }}>
-                0 items
-              </span>
-            </div>
-            <div className="flex items-center justify-between mt-4">
-              <div className="flex items-center space-x-3">
-                <ShoppingBag className="h-5 w-5" style={{ color: "#A0714C" }} />
-                <span
-                  className="text-base font-medium"
-                  style={{ color: "#664C3A" }}
-                >
-                  Carrito
-                </span>
-              </div>
-              <span className="text-sm" style={{ color: "#9E9C99" }}>
-                0 items
-              </span>
-            </div>
-          </div>
         </div>
       </SheetContent>
     </Sheet>

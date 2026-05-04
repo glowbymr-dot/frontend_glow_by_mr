@@ -81,7 +81,7 @@ export default function TerminosPage() {
                 Para asuntos legales, contáctanos a:
               </p>
               <p className="text-sm text-gray-500">
-                📧 legal@joyeria.com
+                📧 {process.env.NEXT_PUBLIC_EMAIL}
                 <br />
                 📞 +1 (555) 123-4567
                 <br />

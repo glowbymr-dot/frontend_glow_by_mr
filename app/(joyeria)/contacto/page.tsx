@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { MapPin, Phone, Mail, Clock, Send, Sparkles } from "lucide-react";
+import { Phone, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { infoContacto, redesSociales } from "@/app/helpers/data/redes";
+import FormContact from "./ui/FormContact";
+import { crearContacto } from "@/app/api/contacto/accions/crear-contacto";
+import { isAxiosError } from "axios";
 
 const ContactoJoyeriaPage = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +17,7 @@ const ContactoJoyeriaPage = () => {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -27,12 +27,38 @@ const ContactoJoyeriaPage = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [errors, setErrors] = useState<{
+    nombre?: string;
+    email?: string;
+    telefono?: string;
+    mensaje?: string;
+  }>({});
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 5000);
-    setFormData({ nombre: "", email: "", telefono: "", mensaje: "" });
+    try {
+      setIsLoading(true);
+
+      await crearContacto(formData);
+
+      setIsSubmitted(true);
+
+      setFormData({
+        nombre: "",
+        email: "",
+        telefono: "",
+        mensaje: "",
+      });
+
+      setTimeout(() => setIsSubmitted(false), 5000);
+    } catch (error) {
+      if (isAxiosError(error)) {
+        alert("Error al enviar el mensaje ❌");
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -117,77 +143,12 @@ const ContactoJoyeriaPage = () => {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <Label htmlFor="nombre" className="text-gray-700 mb-2 block">
-                    Nombre completo *
-                  </Label>
-                  <Input
-                    id="nombre"
-                    type="text"
-                    placeholder="Tu nombre"
-                    value={formData.nombre}
-                    onChange={handleChange}
-                    required
-                    className="border-gray-300 focus:border-[#A0714C] focus:ring-[#A0714C]"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="email" className="text-gray-700 mb-2 block">
-                    Correo electrónico *
-                  </Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="tu@email.com"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="border-gray-300 focus:border-[#A0714C] focus:ring-[#A0714C]"
-                  />
-                </div>
-
-                <div>
-                  <Label
-                    htmlFor="telefono"
-                    className="text-gray-700 mb-2 block"
-                  >
-                    Teléfono
-                  </Label>
-                  <Input
-                    id="telefono"
-                    type="tel"
-                    placeholder="+504 1234-5678"
-                    value={formData.telefono}
-                    onChange={handleChange}
-                    className="border-gray-300 focus:border-[#A0714C] focus:ring-[#A0714C]"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="mensaje" className="text-gray-700 mb-2 block">
-                    Mensaje *
-                  </Label>
-                  <Textarea
-                    id="mensaje"
-                    placeholder="Cuéntanos en qué podemos ayudarte..."
-                    rows={5}
-                    value={formData.mensaje}
-                    onChange={handleChange}
-                    required
-                    className="border-gray-300 focus:border-[#A0714C] focus:ring-[#A0714C]"
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  className="w-full bg-linear-to-r from-[#A0714C] to-[#B17953] hover:from-[#8B613B] hover:to-[#9A6A45] text-white font-semibold py-6 rounded-xl transition-all duration-300 transform hover:scale-[1.02]"
-                >
-                  <Send className="w-4 h-4 mr-2" />
-                  Enviar mensaje
-                </Button>
-              </form>
+              <FormContact
+                handleSubmit={handleSubmit}
+                formData={formData}
+                handleChange={handleChange}
+                isLoading={isLoading}
+              />
 
               <div className="mt-8 pt-6 border-t border-gray-200">
                 <p className="text-center text-gray-600 mb-4">
@@ -217,15 +178,15 @@ const ContactoJoyeriaPage = () => {
               <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full">
                 <div className="h-64 md:h-80 lg:h-96 bg-gray-200 relative">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3865.123456789!2d-87.123456!3d14.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f6f8f8f8f8f8f8f%3A0x8f8f8f8f8f8f8f8f!2sTegucigalpa!5e0!3m2!1ses!2shn!4v1699999999999!5m2!1ses!2shn"
+                    src={`${process.env.NEXT_PUBLIC_DIRECCION_MAPS}`}
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="Ubicación de la joyería"
-                  ></iframe>
+                    title="Ubicación de la joyería en La Paz, Honduras"
+                  />
                 </div>
                 <div className="p-6 bg-linear-to-r from-[#664C3A]/5 to-[#A0714C]/5">
                   <h3
@@ -274,7 +235,9 @@ const ContactoJoyeriaPage = () => {
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button
                 className="bg-green-600 hover:bg-green-700 text-white px-6 md:px-8 py-5 md:py-6 rounded-xl text-base md:text-lg gap-2"
-                onClick={() => (window.location.href = "tel:+50412345678")}
+                onClick={() =>
+                  (window.location.href = `tel:+${process.env.NEXT_PUBLIC_CALL_CONTACT}`)
+                }
               >
                 <Phone className="w-5 h-5" />
                 Llamar ahora
@@ -282,7 +245,10 @@ const ContactoJoyeriaPage = () => {
               <Button
                 className="bg-[#25D366] hover:bg-[#20B859] text-white px-6 md:px-8 py-5 md:py-6 rounded-xl text-base md:text-lg gap-2"
                 onClick={() =>
-                  window.open("https://wa.me/50412345678", "_blank")
+                  window.open(
+                    `https://wa.me/${process.env.NEXT_PUBLIC_CALL_CONTACT}`,
+                    "_blank",
+                  )
                 }
               >
                 <svg

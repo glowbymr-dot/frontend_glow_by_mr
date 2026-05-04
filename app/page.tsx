@@ -24,16 +24,21 @@ export default function Home() {
     <div className="overflow-hidden">
       <Inicio />
 
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <motion.div variants={fadeUp}>
-          <ProductosOferta productos={productos_oferta} isLoading={isLoading} />
+      {productos_oferta && productos_oferta.data.length > 0 && (
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <motion.div variants={fadeUp}>
+            <ProductosOferta
+              productos={productos_oferta}
+              isLoading={isLoading}
+            />
+          </motion.div>
         </motion.div>
-      </motion.div>
+      )}
 
       <motion.div
         variants={staggerContainer}

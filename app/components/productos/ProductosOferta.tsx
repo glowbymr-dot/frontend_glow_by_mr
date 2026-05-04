@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import SkeletonProducts from "./SkeletonProducts";
 import { Sparkles } from "lucide-react";
 import CardProductos from "./CardProductos";
+import Autoplay from "embla-carousel-autoplay";
 
 interface Props {
   productos: ResponseProductosInterface | undefined;
@@ -88,6 +89,11 @@ const ProductosOferta = ({ productos, isLoading }: Props) => {
               loop: true,
               slidesToScroll: 1,
             }}
+            plugins={[
+              Autoplay({
+                delay: 2000,
+              }),
+            ]}
             className="w-full"
           >
             <CarouselContent>

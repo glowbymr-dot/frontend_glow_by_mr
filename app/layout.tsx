@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import TanStackProvider from "./providers/TanStackProvider/TanStackProvider";
 import PageTransition from "./components/PageTransition";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +32,11 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <TanStackProvider>
-          <PageTransition>{children}</PageTransition>
+          <PageTransition>
+            {children}
+
+            <Toaster />
+          </PageTransition>
         </TanStackProvider>
       </body>
     </html>

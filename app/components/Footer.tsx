@@ -12,6 +12,7 @@ import {
   Truck,
   CreditCard,
 } from "lucide-react";
+import { redesSociales } from "../helpers/data/redes";
 
 const Footer = () => {
   const FacebookIcon = () => (
@@ -28,12 +29,6 @@ const Footer = () => {
     </svg>
   );
 
-  const TwitterIcon = () => (
-    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
-    </svg>
-  );
-
   const enlacesUtiles = [
     { nombre: "Sobre Nosotros", href: "/nosotros" },
     { nombre: "Contacto", href: "/contacto" },
@@ -46,6 +41,7 @@ const Footer = () => {
   const metodosPago = [
     { nombre: "PayPal", icono: "💰" },
     { nombre: "Transferencia", icono: "🏦" },
+    { nombre: "Efectivo", icono: "💵" },
   ];
 
   const beneficios = [
@@ -54,10 +50,6 @@ const Footer = () => {
     { icono: CreditCard, texto: "Pagos 100% seguros" },
     { icono: Heart, texto: "Atención personalizada" },
   ];
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-  };
 
   return (
     <footer className="bg-linear-to-b from-gray-900 to-gray-950 text-white pt-16 pb-8">
@@ -85,34 +77,21 @@ const Footer = () => {
               </h2>
             </div>
             <p className="text-gray-400 text-sm mb-4 leading-relaxed">
-              Creando momentos inolvidables desde 2003. Joyas únicas y elegantes
-              diseñadas para celebrar los momentos más especiales de tu vida.
+              Creando momentos inolvidables. Joyas únicas y elegantes diseñadas
+              para celebrar los momentos más especiales de tu vida.
             </p>
             <div className="flex gap-3">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#1877f2] transition-colors duration-300"
-              >
-                <FacebookIcon />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-linear-to-r hover:from-[#f09433] hover:to-[#bc1888] transition-all duration-300"
-              >
-                <InstagramIcon />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#1da1f2] transition-colors duration-300"
-              >
-                <TwitterIcon />
-              </a>
+              {redesSociales.map((red) => (
+                <a
+                  key={red.nombre}
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#1877f2] transition-colors duration-300"
+                >
+                  <red.icon />
+                </a>
+              ))}
             </div>
           </div>
 
@@ -141,15 +120,15 @@ const Footer = () => {
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-3 text-gray-400 text-sm">
                 <MapPin className="w-4 h-4 text-[#A0714C] shrink-0" />
-                <span>Calle Principal #123, Centro Histórico, CDMX</span>
+                <span>{process.env.NEXT_PUBLIC_DIRECCION}</span>
               </div>
               <div className="flex items-center gap-3 text-gray-400 text-sm">
                 <Phone className="w-4 h-4 text-[#A0714C] shrink-0" />
-                <span>+52 (55) 1234 5678</span>
+                <span>+504 {process.env.NEXT_PUBLIC_PHONE}</span>
               </div>
               <div className="flex items-center gap-3 text-gray-400 text-sm">
                 <Mail className="w-4 h-4 text-[#A0714C] shrink-0" />
-                <span>info@joyeriaelegancia.com</span>
+                <span>{process.env.NEXT_PUBLIC_EMAIL}</span>
               </div>
               <div className="flex items-center gap-3 text-gray-400 text-sm">
                 <Clock className="w-4 h-4 text-[#A0714C] shrink-0" />
@@ -182,7 +161,9 @@ const Footer = () => {
       </div>
 
       <a
-        href="https://wa.me/525512345678"
+        href={`https://wa.me/${process.env.NEXT_PUBLIC_CALL_CONTACT}?text=${encodeURIComponent(
+          "Hola, estoy interesado en sus artículos de joyería 💎. ¿Podrían brindarme más información?",
+        )}`}
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 bg-[#25D366] text-white p-3 rounded-full shadow-lg hover:bg-[#20B859] transition-all duration-300 hover:scale-110 z-50"

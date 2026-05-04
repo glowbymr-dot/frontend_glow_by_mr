@@ -12,7 +12,6 @@ import { Label } from "@/components/ui/label";
 import Testimonials from "@/app/components/Testimonials";
 import MenuMovil from "./ui/MenuMovil";
 import { Badge } from "@/components/ui/badge";
-import { div } from "framer-motion/client";
 
 const ProductosPage = () => {
   const [page, setPage] = useState(1);

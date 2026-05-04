@@ -34,9 +34,18 @@ const CardProductos = ({ producto }: Props) => {
       )}
 
       <div className="relative h-64 w-full overflow-hidden bg-gray-100">
-        {producto.images && producto.images[0] && (
+        {producto.images && producto.images[0] ? (
           <Image
             src={getStrapiImage(producto.images[0].url)}
+            alt={producto.productName}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            unoptimized
+          />
+        ) : (
+          <Image
+            src="/images/product_not_found.png"
             alt={producto.productName}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-110"

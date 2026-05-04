@@ -133,7 +133,7 @@ export default function EnviosPage() {
           <div className="text-center text-sm text-gray-500">
             <p className="mt-2">
               Para consultas específicas sobre tu pedido, contáctanos a
-              envios@joyeria.com
+              {process.env.NEXT_PUBLIC_EMAIL}
             </p>
           </div>
         </div>

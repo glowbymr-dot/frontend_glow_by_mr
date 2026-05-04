@@ -128,8 +128,8 @@ const NosotrosJoyeriaPage = () => {
             inolvidables
           </h1>
           <p className="text-lg md:text-xl max-w-3xl mx-auto opacity-95">
-            Desde 2003, transformando sueños en joyas únicas que celebran el
-            amor, la vida y los momentos más especiales.
+            Transformando sueños en joyas únicas que celebran el amor, la vida y
+            los momentos más especiales.
           </p>
         </div>
       </section>
